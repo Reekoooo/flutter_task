@@ -57,10 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
                             canvasColor: Colors.teal,
                           ),
                           child: DropdownButton<String>(
+                            underline: Container(),
+                            iconSize: 35.0,
+
                             style: TextStyle(color: Colors.white,fontFamily: 'Cairo'),
                             icon: Icon(
                               Icons.arrow_drop_down_circle,
                               color: Colors.white,
+
                             ),
                             value: dropdownValue,
                             onChanged: (String newValue) {
