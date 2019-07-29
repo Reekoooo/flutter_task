@@ -111,7 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Transform.translate(
       offset: Offset(0.0, Y_offset),
       child: FloatingActionButton(
-          child: Icon(Icons.zoom_out_map), onPressed: () {}),
+          child: Icon(
+            IconData(0xe900, fontFamily: 'fourrect'),size: 35.0,),
+          onPressed: () {}),
     );
   }
 
@@ -146,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 offset: Offset(0.0, Y_offset),
                 child: Text(
                   "الرئيسية",
-                  style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 10.0,),
                 ),
               ),
               Padding(
