@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -28,6 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String dropdownValue = 'صوت تنبيه يارب';
+  double Y_offset = 12.0;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Expanded(
             child: ClipPath(
-              clipper: CustomRect(),
+              clipper: CustomRect(yOffset: Y_offset),
               child: Container(
                 color: Colors.teal,
                 child: Row(
@@ -59,12 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: DropdownButton<String>(
                             underline: Container(),
                             iconSize: 35.0,
-
-                            style: TextStyle(color: Colors.white,fontFamily: 'Cairo'),
+                            style: TextStyle(
+                                color: Colors.white, fontFamily: 'Cairo'),
                             icon: Icon(
                               Icons.arrow_drop_down_circle,
                               color: Colors.white,
-
                             ),
                             value: dropdownValue,
                             onChanged: (String newValue) {
@@ -104,60 +104,77 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.zoom_out_map), onPressed: () {}),
+      floatingActionButton: Transform.translate(
+        offset: Offset(0.0, Y_offset),
+        child: FloatingActionButton(
+          
+            child: Icon(Icons.zoom_out_map), onPressed: () {}),
+      ),
       bottomNavigationBar: BottomAppBar(
+        elevation: 0.0,
         shape: CircularNotchedRectangle(),
         notchMargin: 4.0,
-        child: new Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: IconButton(
-                icon: Icon(Icons.access_alarm),
-                onPressed: () {},
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0,bottom: 32.0,left: 32.0,right: 32.0),
+                  child: IconButton(
+                    icon: Icon(Icons.access_alarms,size: 35.0,color: Colors.grey.withOpacity(0.5),),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context)=>Material(child: Page1()))
+                      );
+                    },
+                  ),
+                ),
+                Transform.translate(
+                  offset: Offset(0.0, Y_offset),
+                  child: Text(
+                    "الرئيسية",
+                    style: TextStyle(fontSize: 14.0),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0,bottom: 32.0,left: 32.0,right: 32.0),
+                  child: IconButton(
+                    icon: Icon(FontAwesomeIcons.compass,size: 30.0,color: Colors.grey.withOpacity(0.5),),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context)=>Material(child: Page2()))
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-            Text(
-              "الرئيسية",
-              style: TextStyle(fontSize: 14.0),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: IconButton(
-                icon: Icon(Icons.explore),
-                onPressed: () {},
-              ),
-            ),
+            Container(
+              height: 40.0,
+              decoration:  BoxDecoration(
+                color: Colors.white,
+                  boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.5),
+                  blurRadius: 3.0,
+                ),
+              ]),
+
+            )
           ],
         ),
       ),
-//      body: Center(
-////        child: Column(
-////          mainAxisAlignment: MainAxisAlignment.end,
-////          children:  <Widget>[
-////            BottomAppBar(
-////
-////              child: new Row(
-////                mainAxisSize: MainAxisSize.max,
-////                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-////                children: <Widget>[
-////                  IconButton(icon: Icon(Icons.menu), onPressed: () {},),
-////                  IconButton(icon: Icon(Icons.search), onPressed: () {},),
-////                ],
-////              ),
-////            ),
-////          ],
-////
-////    ),
-//      ),
     );
   }
 }
 
 class CustomRect extends CustomClipper<Path> {
+  final double yOffset;
+  CustomRect({this.yOffset});
   @override
   Path getClip(Size size) {
     var path = Path();
@@ -165,7 +182,7 @@ class CustomRect extends CustomClipper<Path> {
     path.lineTo((size.width / 2) - 40.0, size.height);
     path.addArc(
         Rect.fromCircle(
-            center: Offset(size.width / 2, size.height), radius: 40.0),
+            center: Offset(size.width / 2, size.height+yOffset), radius: 40.0),
         -3.14,
         3.14);
     path.lineTo(size.width, size.height);
@@ -180,3 +197,32 @@ class CustomRect extends CustomClipper<Path> {
     return false;
   }
 }
+
+class Page1 extends StatefulWidget {
+  @override
+  _Page1State createState() => _Page1State();
+}
+
+class _Page1State extends State<Page1> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Container(
+      child: Text("Page 1",style: TextStyle(fontSize: 50.0),),
+    ));
+  }
+}
+class Page2 extends StatefulWidget {
+  @override
+  _Page2State createState() => _Page2State();
+}
+
+class _Page2State extends State<Page2> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Container(
+      child: Text("Page 2",style: TextStyle(fontSize: 50.0),),
+    ));
+  }
+}
+
+
