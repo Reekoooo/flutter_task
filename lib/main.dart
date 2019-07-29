@@ -10,7 +10,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'Cairo',
-        primarySwatch: Colors.teal,
+        //primarySwatch: Colors.teal,
+        accentColor: Colors.teal[900],
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -39,13 +40,13 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: <Widget>[
           Container(
-            height: 150.0,
+            height: 100.0,
           ),
           Expanded(
             child: ClipPath(
               clipper: CustomRect(yOffset: Y_offset),
               child: Container(
-                color: Colors.teal,
+                color: Colors.teal[900],
                 child: Row(
                   children: <Widget>[
                     Spacer(),
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         textDirection: TextDirection.rtl,
                         child: Theme(
                           data: Theme.of(context).copyWith(
-                            canvasColor: Colors.teal,
+                            canvasColor: Colors.teal[900],
                           ),
                           child: DropdownButton<String>(
                             underline: Container(),
@@ -107,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: Transform.translate(
         offset: Offset(0.0, Y_offset),
         child: FloatingActionButton(
+
           
             child: Icon(Icons.zoom_out_map), onPressed: () {}),
       ),
@@ -136,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   offset: Offset(0.0, Y_offset),
                   child: Text(
                     "الرئيسية",
-                    style: TextStyle(fontSize: 14.0),
+                    style: TextStyle(fontSize: 12.0,fontWeight: FontWeight.bold),
                   ),
                 ),
 
