@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: 'Cairo',
         primarySwatch: Colors.teal,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
@@ -47,27 +48,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   children: <Widget>[
                     Spacer(),
-
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Directionality(
                         textDirection: TextDirection.rtl,
                         child: Theme(
-                          data: ThemeData(
-                              fontFamily: "Encode Sans", //my custom font
-                              canvasColor: Colors.teal,),
-
+                          data: Theme.of(context).copyWith(
+                            canvasColor: Colors.teal,
+                          ),
                           child: DropdownButton<String>(
-                            style: TextStyle(color: Colors.white),
-                            icon: Icon(Icons.arrow_drop_down_circle,color: Colors.white,),
+                            style: TextStyle(color: Colors.white,fontFamily: 'Cairo'),
+                            icon: Icon(
+                              Icons.arrow_drop_down_circle,
+                              color: Colors.white,
+                            ),
                             value: dropdownValue,
                             onChanged: (String newValue) {
                               setState(() {
                                 dropdownValue = newValue;
                               });
                             },
-                            items: <String>['صوت تنبيه يارب', 'صوت تنبيه 2', 'صوت تنبيه 3', 'صوت تنبيه 4']
-                                .map<DropdownMenuItem<String>>((String value) {
+                            items: <String>[
+                              'صوت تنبيه يارب',
+                              'صوت تنبيه 2',
+                              'صوت تنبيه 3',
+                              'صوت تنبيه 4'
+                            ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Padding(
@@ -80,12 +86,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-
                     Spacer(),
-                    Text(" تنبيه الشروق" ,style: TextStyle(color: Colors.white),),
+                    Text(
+                      " تنبيه الشروق",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     Spacer(),
-
-
                   ],
                 ),
               ),
@@ -95,10 +101,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.zoom_out_map),
-          onPressed: (){}),
+          child: Icon(Icons.zoom_out_map), onPressed: () {}),
       bottomNavigationBar: BottomAppBar(
-
         shape: CircularNotchedRectangle(),
         notchMargin: 4.0,
         child: new Row(
@@ -107,12 +111,21 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(18.0),
-              child: IconButton(icon: Icon(Icons.access_alarm), onPressed: () {},),
+              child: IconButton(
+                icon: Icon(Icons.access_alarm),
+                onPressed: () {},
+              ),
             ),
-            Text("الرئيسية",style: TextStyle(fontSize: 20.0),),
+            Text(
+              "الرئيسية",
+              style: TextStyle(fontSize: 14.0),
+            ),
             Padding(
               padding: const EdgeInsets.all(18.0),
-              child: IconButton(icon: Icon(Icons.explore), onPressed: () {},),
+              child: IconButton(
+                icon: Icon(Icons.explore),
+                onPressed: () {},
+              ),
             ),
           ],
         ),
@@ -139,13 +152,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-class CustomRect extends CustomClipper<Path>{
+
+class CustomRect extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
     path.lineTo(0.0, size.height);
-    path.lineTo((size.width/2)-40.0, size.height);
-    path.addArc(Rect.fromCircle(center: Offset(size.width/2, size.height),radius: 40.0), -3.14,3.14);
+    path.lineTo((size.width / 2) - 40.0, size.height);
+    path.addArc(
+        Rect.fromCircle(
+            center: Offset(size.width / 2, size.height), radius: 40.0),
+        -3.14,
+        3.14);
     path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0.0);
 
@@ -157,6 +175,4 @@ class CustomRect extends CustomClipper<Path>{
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return false;
   }
-
-
 }
