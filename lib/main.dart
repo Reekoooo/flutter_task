@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -26,6 +26,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String dropdownValue = 'صوت تنبيه يارب';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +43,48 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ClipPath(
               clipper: CustomRect(),
               child: Container(
-                color: Colors.blue,
+                color: Colors.teal,
                 child: Row(
                   children: <Widget>[
+                    Spacer(),
+
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Theme(
+                          data: ThemeData(
+                              fontFamily: "Encode Sans", //my custom font
+                              canvasColor: Colors.teal,),
+
+                          child: DropdownButton<String>(
+                            style: TextStyle(color: Colors.white),
+                            icon: Icon(Icons.arrow_drop_down_circle,color: Colors.white,),
+                            value: dropdownValue,
+                            onChanged: (String newValue) {
+                              setState(() {
+                                dropdownValue = newValue;
+                              });
+                            },
+                            items: <String>['صوت تنبيه يارب', 'صوت تنبيه 2', 'صوت تنبيه 3', 'صوت تنبيه 4']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Text(value),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Spacer(),
+                    Text(" تنبيه الشروق" ,style: TextStyle(color: Colors.white),),
+                    Spacer(),
+
 
                   ],
                 ),
