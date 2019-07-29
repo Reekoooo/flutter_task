@@ -14,8 +14,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String dropdownValue = 'صوت تنبيه يارب';
+
+  List<String> _items = [
+    'صوت تنبيه يارب  ',
+    'صوت تنبيه 2',
+    'صوت تنبيه 3',
+    'صوت تنبيه 4',
+  ];
+  String dropdownValue ;
+
   double Y_offset = 12.0;
+
+  @override
+  void initState() {
+    super.initState();
+    dropdownValue = _items[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +49,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Column buildBody(BuildContext context) {
-    List<String> _items = [
-      'صوت تنبيه يارب',
-      'صوت تنبيه 2',
-      'صوت تنبيه 3',
-      'صوت تنبيه 4',
-    ];
 
+    final double _upperHieght = MediaQuery.of(context).size.height/6;
     return Column(
       children: <Widget>[
         Container(
-          height: 100.0,
+          height: _upperHieght,
         ),
         Expanded(
           child: ClipPath(
@@ -63,31 +72,46 @@ class _MyHomePageState extends State<MyHomePage> {
                         data: Theme.of(context).copyWith(
                           canvasColor: Colors.teal[900],
                         ),
-                        child: DropdownButton<String>(
-                          underline: Container(),
-                          iconSize: 35.0,
-                          style: TextStyle(
-                              color: Colors.white, fontFamily: 'Cairo'),
-                          icon: Icon(
-                            Icons.arrow_drop_down_circle,
-                            color: Colors.white,
+                        child: Container(
+                          height: 30.0,
+
+
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                          value: dropdownValue,
-                          onChanged: (String newValue) {
-                            setState(() {
-                              dropdownValue = newValue;
-                            });
-                          },
-                          items: _items
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Text(value),
+
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 16.0),
+                            child: DropdownButton<String>(
+                              underline: Container(),
+
+                              iconSize: 35.0,
+                              style: TextStyle(
+                                  color: Colors.white, fontFamily: 'Cairo'),
+                              icon: Icon(
+                                Icons.arrow_drop_down_circle,
+                                color: Colors.white,
+                                size: 30.0,
                               ),
-                            );
-                          }).toList(),
+                              value: dropdownValue,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  dropdownValue = newValue;
+                                });
+                              },
+                              items: _items
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Text(value,textDirection: TextDirection.rtl,),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
                         ),
                       ),
                     ),
