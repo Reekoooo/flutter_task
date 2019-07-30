@@ -160,11 +160,12 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 8.0, bottom: 32.0, left: 32.0, right: 32.0),
+                    top: 4.0, bottom: 32.0, left: 32.0, right: 32.0),
                 child: IconButton(
                   icon: Icon(
-                    Icons.access_alarms,
-                    size: 35.0,
+                    IconData(0xe902, fontFamily: 'caret_down_circle'),
+                    //Icons.access_alarms,
+                    size: 30.0,
                     color: Colors.grey.withOpacity(0.5),
                   ),
                   onPressed: () {
@@ -182,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 8.0, bottom: 32.0, left: 32.0, right: 32.0),
+                    top: 4.0, bottom: 32.0, left: 32.0, right: 32.0),
                 child: IconButton(
                   icon: Icon(
                     FontAwesomeIcons.compass,
