@@ -56,13 +56,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Column(
       children: <Widget>[
         Container(
-          height: _upperHieght,
+          //height: _upperHieght,
         ),
         Expanded(
           child: ClipPath(
             clipper: CustomRect(yOffset: Y_offset),
             child: Container(
-              color: Colors.teal[900],
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('assets/background.png'),
+                    fit: BoxFit.fill,
+                )
+              ),
+              //color: Colors.teal[900],
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 32.0),
                 child: Row(
@@ -78,45 +83,50 @@ class _MyHomePageState extends State<MyHomePage> {
                             canvasColor: Colors.teal[900],
                           ),
                           child: Container(
-                            height: 30.0,
+                            height: 38.0,
+                            padding: EdgeInsets.only(right: 8.0),
 
 
                             decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.1),
+                              color: Color(0xFF013A33),
                               borderRadius: BorderRadius.circular(20.0),
+                                boxShadow: [BoxShadow(
+                                    color:  Colors.black.withOpacity(0.5),
+                                    blurRadius: 0.0,
+                                  offset: Offset(0, 1),
+                                  spreadRadius: 1.0,
+                                  ),
+                                ],
                             ),
 
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
-                              child: DropdownButton<String>(
-                                underline: Container(),
+                            child: DropdownButton<String>(
+                              underline: Container(),
 
-                                iconSize: 35.0,
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Cairo',letterSpacing: 3),
-                                icon: Icon(
-                                  IconData(0xe900, fontFamily: 'caret_down_circle'),
-                                  //Icons.arrow_drop_down_circle,
-                                  color: Colors.white,
-                                  size: 30.0,
-                                ),
-                                value: dropdownValue,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    dropdownValue = newValue;
-                                  });
-                                },
-                                items: _items
-                                    .map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Text(value,textDirection: TextDirection.rtl,),
-                                    ),
-                                  );
-                                }).toList(),
+                              iconSize: 35.0,
+                              style: TextStyle(
+                                  color: Colors.white, fontFamily: 'Cairo',letterSpacing: 3),
+                              icon: Icon(
+                                IconData(0xe900, fontFamily: 'caret_down_circle'),
+                                //Icons.arrow_drop_down_circle,
+                                color: Colors.white,
+                                size: 30.0,
                               ),
+                              value: dropdownValue,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  dropdownValue = newValue;
+                                });
+                              },
+                              items: _items
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Text(value,textDirection: TextDirection.rtl,),
+                                  ),
+                                );
+                              }).toList(),
                             ),
                           ),
                         ),
@@ -141,10 +151,29 @@ class _MyHomePageState extends State<MyHomePage> {
   Transform buildFAB() {
     return Transform.translate(
       offset: Offset(0.0, Y_offset),
-      child: FloatingActionButton(
-          child: Icon(
-            IconData(0xe900, fontFamily: 'fourrect'),size: 35.0,),
-          onPressed: () {}),
+      child:Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Container(
+            height: 70.0,
+            color: Colors.transparent,
+            child: Image.asset('assets/fab_background.png'),
+          ),
+          InkWell(
+            onTap: (){print('tap pressed');},
+            child: Container(
+              height: 40.0,
+              color: Colors.transparent,
+              child: Image.asset('assets/fab_icon.png'),
+            ),
+          )
+
+        ],
+      )
+//      FloatingActionButton(
+//          child: Icon(
+//            IconData(0xe900, fontFamily: 'fourrect'),size: 35.0,),
+//          onPressed: () {}),
     );
   }
 
@@ -165,10 +194,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     top: 4.0, bottom: 32.0, left: 32.0, right: 32.0),
                 child: IconButton(
                   icon: Icon(
-                    IconData(0xe902, fontFamily: 'caret_down_circle'),
+                    IconData(0xe903, fontFamily: 'caret_down_circle'),
                     //Icons.access_alarms,
-                    size: 30.0,
-                    color: Colors.grey.withOpacity(0.5),
+                    size: 35.0,
+                    color: Colors.grey.withOpacity(0.7),
                   ),
                   onPressed: () {
                     Navigator.push(context, SlideRightRoute(page: Material(child: Page1())));
@@ -187,9 +216,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     top: 4.0, bottom: 32.0, left: 32.0, right: 32.0),
                 child: IconButton(
                   icon: Icon(
-                    FontAwesomeIcons.compass,
-                    size: 30.0,
-                    color: Colors.grey.withOpacity(0.5),
+                    IconData(0xe904, fontFamily: 'caret_down_circle'),
+                    size: 35.0,
+                    color: Colors.grey.withOpacity(0.7),
                   ),
                   onPressed: () {
                     Navigator.push(context, SlideLeftRoute(page: Material(child: Page2())));
@@ -198,15 +227,15 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          Container(
-            height: 40.0,
-            decoration: BoxDecoration(color: Colors.white, boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.5),
-                blurRadius: 3.0,
-              ),
-            ]),
-          )
+//          Container(
+//            height: 40.0,
+//            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+//              BoxShadow(
+//                color: Colors.black.withOpacity(0.5),
+//                blurRadius: 3.0,
+//              ),
+//            ]),
+//          )
         ],
       ),
     );
