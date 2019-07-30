@@ -61,68 +61,73 @@ class _MyHomePageState extends State<MyHomePage> {
             clipper: CustomRect(yOffset: Y_offset),
             child: Container(
               color: Colors.teal[900],
-              child: Row(
-                children: <Widget>[
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: Theme(
-                        data: Theme.of(context).copyWith(
-                          canvasColor: Colors.teal[900],
-                        ),
-                        child: Container(
-                          height: 30.0,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 32.0),
+                child: Row(
 
-
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(20.0),
+                  children: <Widget>[
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Theme(
+                          data: Theme.of(context).copyWith(
+                            canvasColor: Colors.teal[900],
                           ),
+                          child: Container(
+                            height: 30.0,
 
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 16.0),
-                            child: DropdownButton<String>(
-                              underline: Container(),
 
-                              iconSize: 35.0,
-                              style: TextStyle(
-                                  color: Colors.white, fontFamily: 'Cairo'),
-                              icon: Icon(
-                                Icons.arrow_drop_down_circle,
-                                color: Colors.white,
-                                size: 30.0,
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 16.0),
+                              child: DropdownButton<String>(
+                                underline: Container(),
+
+                                iconSize: 35.0,
+                                style: TextStyle(
+                                    color: Colors.white, fontFamily: 'Cairo',letterSpacing: 3),
+                                icon: Icon(
+                                  IconData(0xe900, fontFamily: 'caret_down_circle'),
+                                  //Icons.arrow_drop_down_circle,
+                                  color: Colors.white,
+                                  size: 30.0,
+                                ),
+                                value: dropdownValue,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    dropdownValue = newValue;
+                                  });
+                                },
+                                items: _items
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Text(value,textDirection: TextDirection.rtl,),
+                                    ),
+                                  );
+                                }).toList(),
                               ),
-                              value: dropdownValue,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  dropdownValue = newValue;
-                                });
-                              },
-                              items: _items
-                                  .map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Text(value,textDirection: TextDirection.rtl,),
-                                  ),
-                                );
-                              }).toList(),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Spacer(),
-                  Text(
-                    " تنبيه الشروق",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Spacer(),
-                ],
+                    Spacer(),
+                    Text(
+                      " تنبيه الشروق",
+                      style: TextStyle(color: Colors.white,letterSpacing: 3),
+                    ),
+                    Spacer(),
+                  ],
+                ),
               ),
             ),
           ),

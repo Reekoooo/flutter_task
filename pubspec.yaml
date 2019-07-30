@@ -68,6 +68,11 @@ flutter:
         - asset: fonts/fourrect.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+    - family: caret_down_circle
+      fonts:
+        - asset: fonts/caret_down_circle.ttf
+
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
