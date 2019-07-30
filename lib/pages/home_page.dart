@@ -4,7 +4,6 @@ import 'package:flutter_task/pages/page2.dart';
 import 'package:flutter_task/ui_components/custom_rect.dart';
 import 'package:flutter_task/ui_components/slide_left_route.dart';
 import 'package:flutter_task/ui_components/slide_right_route.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -154,6 +153,12 @@ class _MyHomePageState extends State<MyHomePage> {
       child:Stack(
         alignment: Alignment.center,
         children: <Widget>[
+          Container(
+            height: 100,
+            color: Colors.transparent,
+            child: Image.asset('assets/ellipse_1.png'),
+          ),
+
           Container(
             height: 70.0,
             color: Colors.transparent,
