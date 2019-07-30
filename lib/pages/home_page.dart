@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task/pages/page1.dart';
 import 'package:flutter_task/pages/page2.dart';
 import 'package:flutter_task/ui_components/custom_rect.dart';
+import 'package:flutter_task/ui_components/slide_left_route.dart';
+import 'package:flutter_task/ui_components/slide_right_route.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -169,8 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.grey.withOpacity(0.5),
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Material(child: Page1())));
+                    Navigator.push(context, SlideRightRoute(page: Material(child: Page1())));
                   },
                 ),
               ),
@@ -191,8 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.grey.withOpacity(0.5),
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Material(child: Page2())));
+                    Navigator.push(context, SlideLeftRoute(page: Material(child: Page2())));
                   },
                 ),
               ),
